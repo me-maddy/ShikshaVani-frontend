@@ -4,7 +4,7 @@ interface StudentFeedback {
   id: number;
   className: string;
   subjectName: string;
-  rating: number; // 1 to 5
+  rating: number;
   comment?: string;
 }
 

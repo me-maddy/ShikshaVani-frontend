@@ -1,6 +1,7 @@
 import React from "react";
 import { Feedback } from "../../types";
 import StarRating from "./StarRating";
+import { formatUtcToLocal } from "../../utils/formatDate";
 
 interface FeedbackCardProps {
   feedback: Feedback;
@@ -17,6 +18,11 @@ const FeedbackCardForFaculty: React.FC<FeedbackCardProps> = ({ feedback }) => {
         <StarRating rating={feedback.rating} />
       </div>
       <p className="text-gray-700">{feedback.comment}</p>
+      {feedback.date && (
+        <p className="text-gray-500 mt-2 text-sm">
+          {formatUtcToLocal(feedback.date)}
+        </p>
+      )}
     </article>
   );
 };

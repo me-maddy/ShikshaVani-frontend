@@ -23,21 +23,6 @@ export interface Class {
   facultyId: number;
 }
 
-export interface Subject {
-  id: number;
-  name: string;
-  classId: number;
-}
-
-export interface Feedback {
-  id: number;
-  userId: number;
-  subjectId: number;
-  rating: number;
-  message: string;
-  createdAt: string;
-}
-
 export interface LoginCredentials {
   email: string;
   password: string;
@@ -60,6 +45,7 @@ export interface Feedback {
   comment: string;
   studentName: string;
   studentEmail: string;
+  date?: string;
 }
 
 export interface Subject {
