@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { LogOut } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import Button from "../common/Button";
@@ -12,6 +12,7 @@ interface UserLayoutProps {
 const UserLayout: React.FC<UserLayoutProps> = ({ children, title }) => {
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleLogout = () => {
     logout();
@@ -23,7 +24,7 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children, title }) => {
       <header className="bg-white shadow-sm">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="flex">
+            <div className="flex items-center">
               <Link to="/main" className="text-xl font-bold text-blue-600">
                 <div className="w-16 h-16 relative">
                   <img
@@ -33,7 +34,30 @@ const UserLayout: React.FC<UserLayoutProps> = ({ children, title }) => {
                   />
                 </div>
               </Link>
+              <div className="ml-16 flex items-center gap-x-3 sm:gap-x-4 md:gap-x-6">
+                <Link
+                  to="/main"
+                  className={`tracking-wide ${
+                    location.pathname === "/main"
+                      ? "text-blue-400"
+                      : "text-slate-700"
+                  }`}
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/my_feedback"
+                  className={`tracking-wide ${
+                    location.pathname === "/my_feedback"
+                      ? "text-blue-400"
+                      : "text-slate-700"
+                  }`}
+                >
+                  My Feedback
+                </Link>
+              </div>
             </div>
+
             <div>
               <Button
                 variant="outline"

@@ -1,6 +1,14 @@
 import React, { ReactNode, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { LogOut, Menu, X, Users, BookOpen, MessageSquare } from "lucide-react";
+import {
+  LogOut,
+  Menu,
+  X,
+  Users,
+  BookOpen,
+  MessageSquare,
+  LayoutDashboard,
+} from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import Button from "../common/Button";
 
@@ -20,6 +28,16 @@ const FacultyLayout: React.FC<FacultyLayoutProps> = ({ children }) => {
   };
 
   const tabs = [
+    {
+      name: "Dashboard",
+      path: "/faculty/dashboard",
+      icon: <LayoutDashboard size={20} />,
+    },
+    {
+      name: "Students",
+      path: "/faculty/dashboard/students",
+      icon: <Users size={20} />,
+    },
     {
       name: "Classes",
       path: "/faculty/dashboard/classes",
@@ -43,7 +61,7 @@ const FacultyLayout: React.FC<FacultyLayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <header className="bg-purple-700 text-white shadow-md">
+      <header className="bg-purple-500 text-white shadow-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center">
@@ -59,9 +77,9 @@ const FacultyLayout: React.FC<FacultyLayoutProps> = ({ children }) => {
                 variant="outline"
                 size="sm"
                 onClick={handleLogout}
-                className="flex items-center gap-1 bg-transparent hover:bg-purple-600 !bg-purple-700 text-white border-white hover:border-transparent"
+                className="flex items-center px-4 py-1 !text-white !bg-white/20 rounded-md hover:!bg-white/30 transition-colors"
               >
-                <LogOut size={16} />
+                <LogOut size={16} className="mr-2" />
                 Logout
               </Button>
               <button
@@ -127,7 +145,7 @@ const FacultyLayout: React.FC<FacultyLayoutProps> = ({ children }) => {
 
         {/* Main content area */}
         <main className="flex-1 p-4 md:p-8 overflow-y-auto">
-          <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
+          <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-md p-6">
             {children}
           </div>
         </main>

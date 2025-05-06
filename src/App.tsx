@@ -20,6 +20,7 @@ import FacultyRegister from "./pages/faculty/Register";
 import FacultyLogin from "./pages/faculty/Login";
 import Dashboard from "./pages/faculty/Dashboard";
 import FacultyProfileSetup from "./components/faculty/FacultyProfileSetup";
+import MyFeedback from "./pages/user/MyFeedback";
 
 function App() {
   return (
@@ -46,6 +47,14 @@ function App() {
               element={
                 <ProtectedRoute userType="user" requireFullRegistration>
                   <Main />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/my_feedback"
+              element={
+                <ProtectedRoute userType="user" requireFullRegistration>
+                  <MyFeedback />
                 </ProtectedRoute>
               }
             />

@@ -383,6 +383,34 @@ export const api = {
     }
   },
 
+  getStudentFeebacks: async (): Promise<ApiResponse<any>> => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        `${ApplicationConfig.BACKEND_URI}/feedback/student`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (response.status === 401) {
+        localStorage.removeItem("token");
+      }
+      if (!response.ok) {
+        throw new Error(data.detail || "Something went wrong");
+      }
+      return { success: true, data: data };
+    } catch (error) {
+      const errorMsg =
+        error instanceof Error ? error.message : "Something went wrong";
+
+      return { success: false, error: errorMsg };
+    }
+  },
+
   submitFeedback: async (
     subject_id: number,
     rating: number,
@@ -426,6 +454,51 @@ export const api = {
         {
           method: "GET",
         }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.detail || "Something went wrong");
+      }
+
+      return { success: true, data: data };
+    } catch (error) {
+      const errorMsg =
+        error instanceof Error ? error.message : "Something went wrong";
+
+      return { success: false, error: errorMsg };
+    }
+  },
+
+  getFacultySummary: async (): Promise<ApiResponse<any>> => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        `${ApplicationConfig.BACKEND_URI}/faculty/summary`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.detail || "Something went wrong");
+      }
+
+      return { success: true, data: data };
+    } catch (error) {
+      const errorMsg =
+        error instanceof Error ? error.message : "Something went wrong";
+
+      return { success: false, error: errorMsg };
+    }
+  },
+
+  getFacultyStudents: async (): Promise<ApiResponse<any>> => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await fetch(
+        `${ApplicationConfig.BACKEND_URI}/faculty/students`,
+        { method: "GET", headers: { Authorization: `Bearer ${token}` } }
       );
       const data = await response.json();
       if (!response.ok) {

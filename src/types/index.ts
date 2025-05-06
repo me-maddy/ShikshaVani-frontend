@@ -53,3 +53,30 @@ export interface ApiResponse<T> {
   data?: T;
   error?: string;
 }
+
+export interface Feedback {
+  id: number;
+  rating: number;
+  comment: string;
+  studentName: string;
+  studentEmail: string;
+}
+
+export interface Subject {
+  id: number;
+  subjectName: string;
+  feedbacks: Feedback[];
+}
+
+export interface ClassData {
+  id: number;
+  class: string;
+  subjects: Subject[];
+}
+
+export interface Student {
+  id: number;
+  student_name: string;
+  student_email: string;
+  student_class_name: string;
+}
